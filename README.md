@@ -20,7 +20,7 @@ This is a quick example. A more detailed example (including hostile tampering an
     block1.add_message(msg1)
     block1.add_message(msg2)
 
-    # or by constructor arguments
+    # or using the constructor
 
     block1 = Block(msg1, msg2)
 
