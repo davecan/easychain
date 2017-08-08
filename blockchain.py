@@ -83,10 +83,14 @@ class Block:
                 if i > 0 and msg.prev_hash != self.messages[i-1].hash:
                     raise InvalidBlock("Invalid block: Message #{} has invalid message link in block: {}".format(i, str(self)))
             except InvalidMessage as ex:
-                raise InvalidBlock("Invalid block: Message #{} failed validation: {}. In block: {}".format(i, str(ex), str(self), str(msg)))
+                raise InvalidBlock("Invalid block: Message #{} failed validation: {}. In block: {}".format(
+                    i, str(ex), str(self))
+                )
 
     def __repr__(self):
-        return 'Block<hash: {}, prev_hash: {}, messages: {}, time: {}>'.format(self.hash, self.prev_hash, len(self.messages), self.timestamp)
+        return 'Block<hash: {}, prev_hash: {}, messages: {}, time: {}>'.format(
+            self.hash, self.prev_hash, len(self.messages), self.timestamp
+        )
 
 
 

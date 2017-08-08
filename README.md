@@ -3,7 +3,7 @@
 This is the result of a bit of research and some tinkering to understand the fundamental concepts of a blockchain. Readers are directed to Ilya Gritorik's fantastic [Minimum Viable Blockchain](https://www.igvita.com/2014/05/05/minimum-viable-block-chain/) article for more general information about what blockchains are and how they work conceptually.
 
 This implementation focuses *only* on the hashed ledger concept. It specifically does not include any concept of mining or any other form of 
-distributed consensus. It also abstracts the concept of a transaction to that of a message in general.
+distributed consensus. It also abstracts the concept of a transaction to that of a message in general. The concept of a header and payload in messages and blocks is adapted from Bitcoin.
 
 # Example
 
