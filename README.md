@@ -20,6 +20,10 @@ This is a quick example. A more detailed example (including hostile tampering an
     block1.add_message(msg1)
     block1.add_message(msg2)
 
+    # or by constructor arguments
+
+    block1 = Block(msg1, msg2)
+
     # messages are now fully hashed and linked, msg2 depends on msg1, tampering can be detected
 
     block2 = Block()
