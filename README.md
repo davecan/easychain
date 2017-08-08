@@ -5,6 +5,8 @@ This is the result of a bit of research and some tinkering to understand the fun
 This implementation focuses *only* on the hashed ledger concept. It specifically does not include any concept of mining or any other form of 
 distributed consensus. It also abstracts the concept of a transaction to that of a message in general. The concept of a header and payload in messages and blocks is adapted from Bitcoin.
 
+I do not pretend to be a python expert, so some of this can certainly be written better.
+
 # Example
 
 This is a quick example. A more detailed example (including hostile tampering and detection) is in `example.py`. There are also a few basic unit tests.
