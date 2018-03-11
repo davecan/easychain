@@ -39,7 +39,10 @@ class Message(object):
         self.sender = sender
         self.receiver = receiver
         self.data = data
-        self.timestamp = time.time()
+
+    @property
+    def timestamp(self)
+        return time.time()
 
     @property
     def size(self):
