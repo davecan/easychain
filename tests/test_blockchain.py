@@ -1,23 +1,30 @@
-from blockchain import Message, Block, Blockchain, InvalidBlockchain
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
+from easychain.blockchain import Message, Block, Blockchain, InvalidBlockchain
 import unittest
 import hashlib
 
+
 class TestBlockchain(unittest.TestCase):
+
     def get_block(self, msg):
-        B = Block()
-        B.add_message(Message(msg))
-        return B
+        block = Block()
+        block.add_message(msg)
+        return block
 
     def get_blocks(self, *args):
-        L = []
+        content = []
+        last_block = None
         for arg in args:
-            b = Block()
-            b.add_message(Message(arg))
-            L.append(b)
-        for i, block in enumerate(L):
-            block.link(L[i-1]) if i > 0 else None
-            block.seal()
-        return L
+            block = Block()
+            block.add_message(arg)
+
+            if last_block:
+                block.link(last_block)
+
+            last_block = block
+            content.append(block)
+        return content
 
     def test_creation(self):
         chain = Blockchain()
@@ -43,12 +50,21 @@ class TestBlockchain(unittest.TestCase):
 
     def test_invalid_block_breaks_chain(self):
         chain = Blockchain()
-        chain.blocks = self.get_blocks("first", "second", "third", "fourth", "fifth")
+        chain.blocks = self.get_blocks(
+            "first", "second", "third", "fourth", "fifth")
         chain.blocks[1].messages[0].data = "changed"
-        self.assertRaises(InvalidBlockchain, chain.validate)
+        self.assertTrue(chain.validate())
 
-    
+    def test_auto_recreate_blocks(self):
+        chain = Blockchain()
+        chain.blocks = self.get_blocks(
+            "first", "second", "third", "fourth", "fifth")
 
-        
+        old_hashs = set([i.hash for i in chain.blocks])
+        chain.blocks[1].messages[0].data = "changed"
+        new_hashs = set([i.hash for i in chain.blocks])
+        self.assertNotEqual(old_hashs, new_hashs)
+
+
 if __name__ == '__main__':
     unittest.main()
