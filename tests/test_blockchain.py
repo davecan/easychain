@@ -3,8 +3,10 @@ from __future__ import absolute_import
 from easychain.blockchain import Message, Block, Blockchain, InvalidBlockchain
 import unittest
 import hashlib
+from freezegun import freeze_time
 
 
+@freeze_time("1955-11-12")
 class TestBlockchain(unittest.TestCase):
 
     def get_block(self, msg):

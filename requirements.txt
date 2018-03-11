@@ -1,5 +1,6 @@
 appnope==0.1.0
 attrs==17.4.0
+click==6.7
 decorator==4.2.1
 freezegun==0.3.10
 ipdb==0.11
@@ -12,8 +13,10 @@ pluggy==0.6.0
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 py==1.5.2
+py-cpuinfo==3.3.0
 Pygments==2.2.0
 pytest==3.4.2
+pytest-benchmark==3.1.1
 pytest-freezegun==0.2.0
 python-dateutil==2.6.1
 simplegeneric==0.8.1

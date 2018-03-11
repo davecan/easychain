@@ -41,8 +41,15 @@ class Message(object):
         self.data = data
 
     @property
-    def timestamp(self)
+    def timestamp(self):
+        if hasattr(self, "_timestamp") and self._timestamp:
+            return self._timestamp
         return time.time()
+
+    @timestamp.setter
+    def timestamp(self, value):
+        self._timestamp = value
+        return self._timestamp
 
     @property
     def size(self):

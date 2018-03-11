@@ -8,8 +8,10 @@ from easychain.blockchain import (Message,
                                   _parse_args)
 import unittest
 import hashlib
+from freezegun import freeze_time
 
 
+@freeze_time("1955-11-12")
 class TestBlock(unittest.TestCase):
 
     def get_messages(self, *args):
