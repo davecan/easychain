@@ -11,7 +11,7 @@ class TestBlockchain(unittest.TestCase):
 
     def get_block(self, msg):
         block = Block()
-        block.add_message(msg)
+        block.add_message(Message(msg))
         return block
 
     def get_blocks(self, *args):
@@ -19,7 +19,7 @@ class TestBlockchain(unittest.TestCase):
         last_block = None
         for arg in args:
             block = Block()
-            block.add_message(arg)
+            block.add_message(Message(arg))
 
             if last_block:
                 block.link(last_block)

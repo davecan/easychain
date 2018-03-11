@@ -34,22 +34,12 @@ class Message(object):
     Sender digitally signs payload. (and recipient too?)
     """
 
-    def __init__(self, data, sender=None, receiver=None):
-        self.prev_msg = None
+    def __init__(self, data, sender=None, receiver=None, link=None):
+        self.prev_msg = link
         self.sender = sender
         self.receiver = receiver
         self.data = data
-
-    @property
-    def timestamp(self):
-        if hasattr(self, "_timestamp") and self._timestamp:
-            return self._timestamp
-        return time.time()
-
-    @timestamp.setter
-    def timestamp(self, value):
-        self._timestamp = value
-        return self._timestamp
+        self.timestamp = time.time()
 
     @property
     def size(self):
@@ -114,7 +104,7 @@ class Block(Message):
 
     def add_message(self, msg, sender=None, receiver=None):
         if not isinstance(msg, Message):
-            msg = Message(msg, sender=None, receiver=None)
+            raise InvalidMessage("add_message should recive one Message")
 
         if len(self.messages):
             msg.link(self.messages[-1])
@@ -122,17 +112,19 @@ class Block(Message):
         self.messages.append(msg)
 
     def validate(self):
-        for i, msg in enumerate(self.messages):
-            if i < 1:
+        for index, msg in enumerate(self.messages):
+            if index <= 1:
                 continue
             try:
-                if msg.prev_hash != self.messages[i - 1].hash:
+                if msg.prev_hash != self.messages[index - 1].hash:
                     raise InvalidBlock(
-                        "Invalid block: Message #{} has invalid message link in block: {}".format(i, str(self)))
-            except InvalidMessage as ex:
+                        "Invalid block: Message #{} has invalid message link in block: {}".format(index, str(self)))
+            except InvalidMessage as error:
                 raise InvalidBlock("Invalid block: Message #{} failed validation: {}. In block: {}".format(
-                    i, str(ex), str(self))
+                    index, str(error), str(self))
                 )
+            except IndexError:
+                pass
         return True
 
     def __repr__(self):

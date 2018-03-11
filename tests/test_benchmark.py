@@ -11,14 +11,15 @@ def create_message():
 def create_block():
     block = Block()
     for i in range(5):
-        msg = "test{}".format(i)
+        msg = Message("test{}".format(i))
         block.add_message(msg)
+    block.validate()
     return block
 
-# def create_blockchain():
-#     chain = Blockchain()
-#     block = create_block()
-#     chain.add_block(block)
+def create_blockchain():
+    chain = Blockchain()
+    block = create_block()
+    chain.add_block(block)
 
 def test_message_hash(benchmark):
     result = benchmark(create_message)
@@ -26,5 +27,5 @@ def test_message_hash(benchmark):
 def test_block(benchmark):
     result = benchmark(create_block)
 
-# def test_blockchain_hash(benchmark):
-#     result = benchmark(create_blockchain)
+def test_blockchain(benchmark):
+    result = benchmark(create_blockchain)
