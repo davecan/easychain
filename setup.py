@@ -16,6 +16,7 @@ def readme():
 
 
 class PyTest(TestCommand):
+
     def finalize_options(self):
         TestCommand.finalize_options(self)
         self.test_args = ['easychain', 'tests', '-vrsx']
@@ -31,7 +32,8 @@ class PyTest(TestCommand):
 setup(
     name='easychain',
     url='https://github.com/davecan/easychain',
-    download_url='https://github.com/davecan/easychain/tarball/{0!s}/'.format(easychain.__version__),
+    download_url='https://github.com/davecan/easychain/tarball/{0!s}/'.format(
+        easychain.__version__),
     author="davecan, valdergallo",
     author_email='valdergallo@gmail.com',
     keywords='Blockchain',
@@ -39,13 +41,22 @@ setup(
     license='MIT',
     long_description=readme(),
     classifiers=[
-      'Operating System :: OS Independent',
-      'Topic :: Utilities'
+        'Development Status :: 4 - Beta',
+        'Operating System :: OS Independent',
+        'Topic :: Utilities',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     version=easychain.__version__,
     cmdclass={'test': PyTest},
     zip_safe=False,
     platforms='any',
     package_dir={'': '.'},
-    packages=find_packages('.', exclude=['tests', '*.tests', 'docs', 'example.py']),
+    packages=find_packages(
+        '.', exclude=['tests', '*.tests', 'docs', 'example.py']),
 )
