@@ -18,7 +18,7 @@ def readme():
 class PyTest(TestCommand):
     def finalize_options(self):
         TestCommand.finalize_options(self)
-        self.test_args = ['easychain', 'tests', '--cov=easychain', '-vrsx']
+        self.test_args = ['easychain', 'tests', '-vrsx']
         self.test_suite = True
 
     def run_tests(self):
@@ -29,7 +29,7 @@ class PyTest(TestCommand):
 
 
 setup(
-    name='data-importer',
+    name='easychain',
     url='https://github.com/davecan/easychain',
     download_url='https://github.com/davecan/easychain/tarball/{0!s}/'.format(easychain.__version__),
     author="davecan, valdergallo",
