@@ -31,8 +31,42 @@ This is a quick example. A more detailed example (including hostile tampering an
     chain.add_block(block2)
 
     # now the blocks are linked, block2 depends on block1
+    
+    In [1]: from easychain.blockchain import *
+    In [2]: %cpaste
+    Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
+    :def get_messages(*args):
+    :    content = []
+    :    last_msg = None
+    :    for arg in args:
+    :        msg = Message(arg)
+    :        content.append(msg)
+    :        if last_msg:
+    :            msg.link(last_msg)
+    :        last_msg = msg
+    :    return content
+    :<EOF>
+    In [3]: msgs = get_messages("first", "second", "third", "fourth", "fifth")
 
-I do not pretend to be a python expert, so some of this can certainly be written better.
+    In [4]: [i.hash for i in msgs]
+    Out[4]:
+    ['576c7599ac25730b29fe334537f4e63c6cd6df168c5f130ebb574ff01fa44c80',
+     '2ceff64c8304e51efb14a23ed3f56fc2331ed98b04db3c0901dc1c487fe6a402',
+     '60f4c82e01a1523edc0f0dda4e55c385483f61fcc51f9c23f31caeedfe6533f4',
+     '65f520f38d67b17edca6e2e02b7e5c2bc12048a018d23ebc88bd6fd3ab7fc23c',
+     '05c98be26168e6b23d24b990a2cabbe053e05106ff147f52a713f3f89f47fde3']
+
+    In [5]: msgs[1].data = 'changed'
+
+    In [6]: [i.hash for i in msgs]
+    Out[6]:
+    ['576c7599ac25730b29fe334537f4e63c6cd6df168c5f130ebb574ff01fa44c80',
+     '4571d216f229ff85816ba0a09b7a26e01c66ab6d0468e5ef224e8a001e36bb2e',
+     'fa4c9bea8f0025295f248c6ad3bd4caf31c9a8aebae0cf19a8c508642a2e5500',
+     '531a69e94f4b43d4a874d90b7e6aadcb22004d1d10080e10a935c3d628c67fb4',
+     '84d94084e4278fb178a46b659f4db99720df9b32ace217b6fd05c69dd062abf8']
+
+
 
 # What it isn't
 
