@@ -5,17 +5,14 @@ B1 = Block()
 B1.add_message(Message("This is the first message"))
 B1.add_message(Message("Second message", "Alice", "Bob"))
 B1.add_message(Message("Third message", "Bob", "Alice"))
-B1.seal()
 
 B2 = Block()
 B2.add_message(Message("Fourth message"))
 B2.add_message(Message("Fifth message", "Eve", "Steve"))
-B2.seal()
 
 B3 = Block()
 B3.add_message(Message("Sixth message"))
 B3.add_message(Message("Seventh Son of a Seventh Son is Iron Maiden's best album", "Me", "Everyone"))
-B3.seal()
 
 B4 = Block()
 B4.add_message(Message("Eighth message", "Bob", "Charlie"))
