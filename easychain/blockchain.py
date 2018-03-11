@@ -123,8 +123,10 @@ class Block(Message):
 
     def validate(self):
         for i, msg in enumerate(self.messages):
+            if i < 1:
+                continue
             try:
-                if i > 0 and msg.prev_hash != self.messages[i - 1].hash:
+                if msg.prev_hash != self.messages[i - 1].hash:
                     raise InvalidBlock(
                         "Invalid block: Message #{} has invalid message link in block: {}".format(i, str(self)))
             except InvalidMessage as ex:
